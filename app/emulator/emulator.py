@@ -1,12 +1,7 @@
-import os
-
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
 import time
-from dou_instructions import DouInstructions
-from dist_edu_instructions import DistEduInstructions
-from saz_instructions import SazInstructions
+from app.configuration import Config
 from selenium.webdriver.common.keys import Keys
 
 class Emulator(Chrome):
@@ -41,7 +36,7 @@ class Emulator(Chrome):
 
 
 if __name__ == '__main__':
-    em = Emulator(SazInstructions)
+    em = Emulator(Config.SazInstruction)
     em.connect_main_page()
     em.login()
     time.sleep(5)
