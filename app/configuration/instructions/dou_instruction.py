@@ -4,7 +4,7 @@ import os
 load_dotenv()
 
 
-class DouInstructions:
+class DouInstruction:
     LOGIN = [
         ((By.ID, "login-link"), "click"),
         ((By.ID, "_loginByMail"), "click"),

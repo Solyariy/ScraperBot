@@ -5,7 +5,7 @@ import os
 load_dotenv()
 
 
-class DistEduInstructions:
+class DistEduInstruction:
     LOGIN = [
         ((By.XPATH, "//*[@id='region-main']/div/div/div/div/div/div/div[3]/div/a"), "click"),
         ((By.XPATH, '//*[@id="i0116"]'), "send_mail+"),

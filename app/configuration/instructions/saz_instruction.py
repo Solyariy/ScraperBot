@@ -4,7 +4,7 @@ import os
 load_dotenv()
 
 
-class SazInstructions:
+class SazInstruction:
     LOGIN = [
         ((By.CSS_SELECTOR, "a[href='/auth/o365']"), "click"),
         ((By.XPATH, '//*[@id="i0116"]'), "send_mail+"),
@@ -14,3 +14,4 @@ class SazInstructions:
     MAIN_PAGE = "https://my.ukma.edu.ua/"
     PASSWORD = os.environ.get("MICROSOFT_PASSWORD")
     MAIL = os.environ.get("MICROSOFT_MAIL")
+
