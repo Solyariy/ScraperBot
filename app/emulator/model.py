@@ -1,11 +1,9 @@
-import re
+from pydantic import BaseModel
 from typing import Optional
-
-from pydantic import BaseModel, Field
-from enum import Enum
 
 
 class Discipline(BaseModel):
+    id_: Optional[int]
     code: int
     name: str
     specialty: str
@@ -22,3 +20,5 @@ class Discipline(BaseModel):
     education_level: str
     lecturer: Optional[str]
 
+    class Config:
+        orm_mode = True

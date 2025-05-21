@@ -14,9 +14,9 @@ class Parser(BeautifulSoup):
             return self
         cards = self.select("div[id='w1'] div[class='panel-group'] div[class='panel panel-default']")
         for card in cards:
-            parser = CardParser(card)
-            parser.get_general_info().get_semester_info().get_speciality_info()
-            self.all_disciplines.extend(parser.disciplines)
+            card_parser = CardParser(card)
+            card_parser.get_general_info().get_semester_info().get_speciality_info()
+            self.all_disciplines.extend(card_parser.disciplines)
         return self
 
     def to_dataframe(self):
