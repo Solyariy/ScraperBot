@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column
 from .session_starter import Base
 from ..emulator import Discipline
+from sqlalchemy import Integer
 
 class DisciplineTable(Base):
     __tablename__ = "disciplines"

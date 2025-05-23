@@ -13,5 +13,9 @@ def scrap_and_parse():
                 all_disc = parser.parse().all_disciplines
                 dao.insert_all(all_disc)
 
+
+
 if __name__ == '__main__':
-    scrap_and_parse()
+    with get_postgres() as session:
+        dao = DisciplineDao(session=session)
+        print(dao.get(code='320112'))
