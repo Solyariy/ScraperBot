@@ -1,6 +1,8 @@
-from selenium.webdriver.common.by import By
-from dotenv import load_dotenv
 import os
+
+from dotenv import load_dotenv
+from selenium.webdriver.common.by import By
+
 load_dotenv()
 
 

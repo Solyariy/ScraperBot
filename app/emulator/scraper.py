@@ -1,21 +1,22 @@
+import time
+
+from pydantic import validate_call
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.service import Service
-import time
-from app.configuration import Config
 from selenium.webdriver.common.keys import Keys
-from pydantic import validate_call
+
+from app.configuration import Config
 
 
 class Scraper(Chrome):
-    def __init__(self, instructor, main_page_url=None):
+    def __init__(self, instructor, main_page_url=None, with_options=False):
         self.instructor = instructor
         self.main_page = main_page_url or instructor.MAIN_PAGE
-        # self.implicitly_wait(5)
         super().__init__(
             service=Service(
                 executable_path="app/emulator/drivers/chromedriver"
             ),
-            # options=Config.CHROME_OPTIONS
+            options=Config.CHROME_OPTIONS if with_options else None
         )
 
     def login(self):

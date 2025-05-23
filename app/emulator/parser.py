@@ -1,5 +1,6 @@
-from bs4 import BeautifulSoup
 import pandas as pd
+from bs4 import BeautifulSoup
+
 from .card_parser import CardParser
 
 

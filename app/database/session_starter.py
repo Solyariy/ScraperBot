@@ -1,12 +1,14 @@
-import sqlalchemy as sa
-from sqlalchemy.orm import sessionmaker, declarative_base
-from app.configuration import Config
 from contextlib import contextmanager
+
+import sqlalchemy as sa
+from sqlalchemy.orm import declarative_base, sessionmaker
+
+from app.configuration import Config
 
 engine = sa.create_engine(
         f"postgresql+psycopg2://"
         f"{Config.POSTGRES_USERNAME}:{Config.POSTGRES_PASSWORD}@localhost:5433"
-        f"/SazScraper")
+        f"/SazScraper", echo=True)
 
 Session = sessionmaker(bind=engine)
 Base = declarative_base()

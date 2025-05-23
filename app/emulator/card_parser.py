@@ -1,6 +1,7 @@
 import re
 
 from bs4 import Tag
+
 from .model import Discipline
 
 

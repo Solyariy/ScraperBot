@@ -1,6 +1,7 @@
-from pydantic import BaseModel
 from typing import Optional
-from numpy import isnan
+
+from pydantic import BaseModel
+from datetime import datetime
 
 
 class Discipline(BaseModel):
@@ -11,7 +12,7 @@ class Discipline(BaseModel):
     semester: Optional[str]
     year: int
     credits_ects: Optional[str]
-    hours: Optional[float]
+    hours: Optional[str]
     students_max: Optional[str]
     groups_max: Optional[str]
     one_group_range: Optional[str]
@@ -19,6 +20,8 @@ class Discipline(BaseModel):
     cathedra: str
     education_level: str
     lecturer: Optional[str]
+    is_deleted: Optional[bool]
+    deletion_time: Optional[datetime]
 
     # def __init__(self, data):
     #     for key, val in data.items():

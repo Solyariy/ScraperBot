@@ -1,8 +1,10 @@
 import os
 from typing import Annotated
+
 from pydantic import StringConstraints
-from .instructions import Dou, DistEdu, Saz
 from selenium.webdriver.chrome.options import Options
+
+from .instructions import DistEdu, Dou, Saz
 
 
 class Config:
