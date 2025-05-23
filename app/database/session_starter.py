@@ -1,32 +1,22 @@
 import sqlalchemy as sa
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
 from app.configuration import Config
+from contextlib import contextmanager
 
 engine = sa.create_engine(
         f"postgresql+psycopg2://"
-        f"{Config.POSTGRES_USERNAME}:{Config.POSTGRES_PASSWORD}@localhost"
+        f"{Config.POSTGRES_USERNAME}:{Config.POSTGRES_PASSWORD}@localhost:5433"
         f"/SazScraper")
 
 Session = sessionmaker(bind=engine)
+Base = declarative_base()
 
+@contextmanager
 def get_postgres():
     with Session() as session:
-        yield session
-
-def sth():
-    i = 1
-    yield i
-    i += 1
-    yield i
-
-from app.database.table_model import DisciplineTable
-from app.emulator.model import Discipline
-import pandas as pd
-if __name__ == '__main__':
-    df = pd.read_csv("/Users/mac/Desktop/Python_DS/ScraperEmulator/files/df_0")
-    # dt = DisciplineTable(*df.iloc[0])
-    dd: pd.Series = df.iloc[2]
-    print(Discipline(**dd.to_dict()))
-    # sess = next(get_postgres())
-
-
+        try:
+            yield session
+            session.commit()
+        except:
+            session.rollback()
+            raise

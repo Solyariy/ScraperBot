@@ -28,9 +28,9 @@ class CardParser:
         if not semester_info:
             return self
         semester_info = semester_info.previous
-        self.info["semester"] = semester_info.find("th").text.strip()
+        self.info["semester"] = semester_info.find("th", string=re.compile(r"(Осінь|Весна|Літо)")).text.strip()
         self.info["credits_ects"], self.info["hours"], *_ = [item.text.split()[0] for item in
-                                                             semester_info.select("td > span")]
+                                                             semester_info.select("tr:nth-child(3) > td > span")]
         groups_info = self.body.select_one("tbody:nth-child(3)")
         self.info["students_max"], self.info["groups_max"], self.info["one_group_range"], *_ = [
             item.text.strip() for item in groups_info.select("tr > td")

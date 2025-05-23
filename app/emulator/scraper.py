@@ -10,7 +10,7 @@ class Scraper(Chrome):
     def __init__(self, instructor, main_page_url=None):
         self.instructor = instructor
         self.main_page = main_page_url or instructor.MAIN_PAGE
-        self.implicitly_wait(5)
+        # self.implicitly_wait(5)
         super().__init__(
             service=Service(
                 executable_path="app/emulator/drivers/chromedriver"
@@ -37,6 +37,7 @@ class Scraper(Chrome):
     @validate_call
     def connect_main_page(self, page_url: Config.URL_PATTERN | None = None):
         self.get(page_url or self.instructor.MAIN_PAGE)
+        self.implicitly_wait(5)
 
     def __enter__(self):
         self.connect_main_page()

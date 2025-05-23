@@ -1,6 +1,6 @@
-from sqlalchemy.orm import Mapped, mapped_column, declarative_base
-
-Base = declarative_base()
+from sqlalchemy.orm import Mapped, mapped_column
+from .session_starter import Base
+from ..emulator import Discipline
 
 class DisciplineTable(Base):
     __tablename__ = "disciplines"
@@ -13,7 +13,7 @@ class DisciplineTable(Base):
     semester: Mapped[str | None]
     year: Mapped[int]
     credits_ects: Mapped[str | None]
-    hours: Mapped[str | None]
+    hours: Mapped[float | None]
     students_max: Mapped[str | None]
     groups_max: Mapped[str | None]
     one_group_range: Mapped[str | None]
@@ -22,3 +22,5 @@ class DisciplineTable(Base):
     education_level: Mapped[str]
     lecturer: Mapped[str | None]
 
+    def __init__(self, clone_obj: Discipline):
+        super().__init__(**clone_obj.model_dump())

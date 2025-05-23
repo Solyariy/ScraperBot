@@ -1,9 +1,9 @@
 from pydantic import BaseModel
 from typing import Optional
+from numpy import isnan
 
 
 class Discipline(BaseModel):
-    id_: Optional[int]
     code: int
     name: str
     specialty: str
@@ -11,7 +11,7 @@ class Discipline(BaseModel):
     semester: Optional[str]
     year: int
     credits_ects: Optional[str]
-    hours: Optional[str]
+    hours: Optional[float]
     students_max: Optional[str]
     groups_max: Optional[str]
     one_group_range: Optional[str]
@@ -20,5 +20,12 @@ class Discipline(BaseModel):
     education_level: str
     lecturer: Optional[str]
 
-    class Config:
-        orm_mode = True
+    # def __init__(self, data):
+    #     for key, val in data.items():
+    #         if isinstance(val, float) and isnan(val):
+    #             data[key] = None
+    #     super().__init__(**data)
+
+    model_config = {
+        "from_attributes": True
+    }
