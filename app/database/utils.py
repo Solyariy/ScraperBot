@@ -1,5 +1,6 @@
-from ..emulator import Discipline
 from typing import Any
+
+from ..emulator import Discipline
 
 
 def get_common(params: dict[str, Any]):

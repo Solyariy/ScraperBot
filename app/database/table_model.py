@@ -1,5 +1,6 @@
 from datetime import datetime
-from sqlalchemy import DateTime, Boolean
+
+from sqlalchemy import Boolean, DateTime
 from sqlalchemy.orm import Mapped, mapped_column
 
 from ..emulator import Discipline

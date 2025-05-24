@@ -15,3 +15,4 @@ class Config:
     (CHROME_OPTIONS := Options()).add_argument("--headless=new")
     POSTGRES_USERNAME = os.environ["POSTGRES_USERNAME"]
     POSTGRES_PASSWORD = os.environ["POSTGRES_PASSWORD"]
+    IS_CHROME_OPTIONS = os.environ.get("IS_CHROME_OPTIONS") or True

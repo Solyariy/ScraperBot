@@ -1,12 +1,13 @@
-from typing import Type, Any
+from datetime import datetime
+from typing import Any, Type
 
 from sqlalchemy import and_
 from sqlalchemy.orm import Session
 
 from ..emulator import Discipline
 from .table_model import DisciplineTable
-from .utils import get_common, check
-from datetime import datetime
+from .utils import check, get_common
+
 
 class DisciplineDao:
     def __init__(self, session: Session):
@@ -23,7 +24,7 @@ class DisciplineDao:
         ]
         self.session.add_all(disc_orm)
 
-    def get_expired(self):
+    def get_deleted(self):
         return self.__get({'is_deleted': True})
 
     def get(self, params: dict[str, Any]) -> list[Type[DisciplineTable]]:
@@ -48,9 +49,8 @@ class DisciplineDao:
             to_update={'is_deleted': True, 'deletion_time': datetime.now()}
         )
 
-    def hard_delete(self, params: dict[str, Any]):
-        check(params)
-        query_dict = get_common(params)
-        res = self.session.query(DisciplineTable).filter_by(**query_dict).delete()
-        return res
+    def hard_delete(self, objs_to_delete):
+        for obj in objs_to_delete:
+            self.session.delete(obj)
+        return len(objs_to_delete)
 

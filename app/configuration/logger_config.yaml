@@ -1,0 +1,31 @@
+version: 1
+disable_existing_loggers: false
+formatters:
+    simple:
+        format: "%(asctime)s: %(levelname)s: %(message)s | %(filename)s"
+handlers:
+    stdout:
+        class: logging.StreamHandler
+        level: INFO
+        formatter: simple
+        stream: ext://sys.stdout
+    stderr:
+        class: logging.StreamHandler
+        level: WARNING
+        formatter: simple
+        stream: ext://sys.stderr
+    file:
+        class: logging.handlers.RotatingFileHandler
+        level: DEBUG
+        formatter: simple
+        filename: app/logs/main_logger.log
+        maxBytes: 1000
+        backupCount: 5
+loggers:
+    root:
+        level: DEBUG
+        handlers:
+            - stderr
+            - stdout
+            - file
+
