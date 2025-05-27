@@ -2,7 +2,7 @@ import re
 
 from bs4 import Tag
 
-from .model import Discipline
+from ..models import Discipline
 
 
 class CardParser:

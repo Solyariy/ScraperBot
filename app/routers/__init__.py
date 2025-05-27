@@ -1,0 +1,1 @@
+from .discipline_router import router as discipline_router

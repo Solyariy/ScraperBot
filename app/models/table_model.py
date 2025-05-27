@@ -1,10 +1,10 @@
 from datetime import datetime
 
+from pydantic import BaseModel
 from sqlalchemy import Boolean, DateTime
 from sqlalchemy.orm import Mapped, mapped_column
 
-from ..emulator import Discipline
-from .session_starter import Base
+from app.database.session_starter import Base
 
 
 class DisciplineTable(Base):
@@ -29,7 +29,7 @@ class DisciplineTable(Base):
     is_deleted: Mapped[bool] = mapped_column(Boolean, default=False)
     deletion_time: Mapped[datetime | None] = mapped_column(DateTime, default=None)
 
-    def __init__(self, clone_obj: Discipline):
+    def __init__(self, clone_obj: BaseModel):
         super().__init__(**clone_obj.model_dump())
 
     def __str__(self):

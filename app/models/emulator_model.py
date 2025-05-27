@@ -5,30 +5,25 @@ from pydantic import BaseModel
 
 
 class Discipline(BaseModel):
-    code: int
-    name: str
-    specialty: str
-    kind: str
+    code: Optional[int]
+    name: Optional[str]
+    specialty: Optional[str]
+    kind: Optional[str]
     semester: Optional[str]
-    year: int
+    year: Optional[int]
     credits_ects: Optional[str]
     hours: Optional[str]
     students_max: Optional[str]
     groups_max: Optional[str]
     one_group_range: Optional[str]
-    faculty: str
-    cathedra: str
-    education_level: str
+    faculty: Optional[str]
+    cathedra: Optional[str]
+    education_level: Optional[str]
     lecturer: Optional[str]
     is_deleted: Optional[bool]
     deletion_time: Optional[datetime]
 
-    # def __init__(self, data):
-    #     for key, val in data.items():
-    #         if isinstance(val, float) and isnan(val):
-    #             data[key] = None
-    #     super().__init__(**data)
-
     model_config = {
         "from_attributes": True
     }
+

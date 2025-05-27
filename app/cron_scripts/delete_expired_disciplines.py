@@ -1,11 +1,11 @@
 from datetime import datetime
 
-from ..database import DisciplineDao, get_postgres
+from ..database import DisciplineDao, get_postgres_manager
 
 
 def delete_expired():
     now = datetime.now()
-    with get_postgres() as session:
+    with get_postgres_manager() as session:
         dao = DisciplineDao(session=session)
         deleted_disc = [
             discipline

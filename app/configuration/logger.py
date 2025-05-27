@@ -1,7 +1,9 @@
+import functools
 import logging.config
-from logging import getLogger
-import yaml
 import os
+from logging import getLogger
+
+import yaml
 
 logger = getLogger("main_logger")
 
@@ -20,6 +22,7 @@ def setup_logging():
 
 
 def log(func):
+    @functools.wraps(func)
     def wrapper(*args, **kwargs):
         try:
             res = func(*args, **kwargs)
@@ -27,5 +30,5 @@ def log(func):
             return res
         except Exception as e:
             logger.warning(msg=f"'{str(e).upper()}' at {func.__name__}()")
-
+            raise
     return wrapper

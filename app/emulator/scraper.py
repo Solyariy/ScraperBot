@@ -5,7 +5,7 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
 
-from app.configuration import Config
+from ..configuration import Config
 
 
 class Scraper(Chrome):

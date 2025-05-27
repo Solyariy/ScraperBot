@@ -1,2 +1,2 @@
 from .discipline_dao import DisciplineDao
-from .session_starter import get_postgres
+from .session_starter import get_postgres, get_postgres_manager
