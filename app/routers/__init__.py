@@ -1,1 +1,2 @@
 from .discipline_router import router as discipline_router
+from .async_discipline_router import router as async_discipline_router

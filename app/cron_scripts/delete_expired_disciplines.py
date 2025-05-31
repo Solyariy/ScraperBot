@@ -1,19 +1,22 @@
+import asyncio
 from datetime import datetime
 
-from ..database import DisciplineDao, get_postgres_manager
+from ..database import DisciplineDaoAsync, get_async_postgres_manager
 
 
-def delete_expired():
+async def delete_expired():
     now = datetime.now()
-    with get_postgres_manager() as session:
-        dao = DisciplineDao(session=session)
+    async with get_async_postgres_manager() as session:
+        dao = DisciplineDaoAsync(session=session)
+        deleted = await dao.get_deleted()
         deleted_disc = [
             discipline
-            for discipline in dao.get_deleted()
+            for discipline in deleted
             if (now - discipline.deletion_time).days > 30
         ]
-        res = dao.hard_delete(deleted_disc)
+        res = await dao.hard_delete(deleted_disc)
     return res
 
+
 if __name__ == '__main__':
-    delete_expired()
+    asyncio.run(delete_expired())

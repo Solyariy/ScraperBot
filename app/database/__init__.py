@@ -1,2 +1,4 @@
-from .discipline_dao import DisciplineDao
 from .session_starter import get_postgres, get_postgres_manager
+from .session_starter_async import get_async_postgres, get_async_postgres_manager
+from .discipline_dao import DisciplineDao
+from .discipline_dao_async import DisciplineDaoAsync
