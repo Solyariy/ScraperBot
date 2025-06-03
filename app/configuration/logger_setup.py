@@ -6,7 +6,7 @@ import logging.config
 # call setup_logging at lifespan
 def setup_logging():
     if not os.path.exists(path_ := os.path.join("app", "logs")):
-        os.mkdir(path_)
+        os.makedirs(path_, exist_ok=True)
     if not os.path.exists(file_ := os.path.join(path_, "main_logger.log")):
         with open(file_, "w"):
             pass
