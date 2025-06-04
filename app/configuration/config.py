@@ -13,6 +13,6 @@ class Config:
     DIST_EDU_INSTRUCTION = DistEdu
     DOU_INSTRUCTION = Dou
     (CHROME_OPTIONS := Options()).add_argument("--headless=new")
-    POSTGRES_USERNAME = os.environ["POSTGRES_USERNAME"]
-    POSTGRES_PASSWORD = os.environ["POSTGRES_PASSWORD"]
+    POSTGRES_URL = os.environ.get("POSTGRES_URL")
+    POSTGRES_ASYNC_URL = os.environ.get("POSTGRES_ASYNC_URL")
     IS_CHROME_OPTIONS = os.environ.get("IS_CHROME_OPTIONS") or True

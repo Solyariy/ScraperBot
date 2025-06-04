@@ -1,0 +1,32 @@
+services:
+  postgres_db:
+    image: postgres:alpine
+    env_file:
+      - .env
+    ports:
+    - "5432:5432"
+    volumes:
+    - postgres_data:/var/lib/postgres/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "psql -U sol -d saz_scraper_database"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    
+
+
+  fastapi_server:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "5050:5050"
+    volumes:
+      - ./app:/saz_scraper/app
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

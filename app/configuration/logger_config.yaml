@@ -14,18 +14,9 @@ handlers:
         level: WARNING
         formatter: simple
         stream: ext://sys.stderr
-    file:
-        class: logging.handlers.RotatingFileHandler
-        level: DEBUG
-        formatter: simple
-        filename: app/logs/main_logger.log
-        maxBytes: 100000
-        backupCount: 5
 loggers:
     root:
         level: DEBUG
         handlers:
             - stderr
             - stdout
-            - file
-
