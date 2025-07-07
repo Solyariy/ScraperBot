@@ -3,10 +3,7 @@ from contextlib import asynccontextmanager
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 from ..configuration import Config
 
-engine_async = create_async_engine(
-    f"postgresql+asyncpg://"
-    f"{Config.POSTGRES_USERNAME}:{Config.POSTGRES_PASSWORD}@localhost:5433"
-    f"/SazScraper", echo=True)
+engine_async = create_async_engine(Config.POSTGRES_ASYNC_URL, echo=True, pool_pre_ping=True)
 
 AsyncSession = async_sessionmaker(bind=engine_async)
 

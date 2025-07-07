@@ -27,7 +27,7 @@ class DisciplineDaoAsync:
             DisciplineTable(disc)
             for disc in disc_list.container
         ]
-        query = insert(DisciplineTable).values(**disc_orm)
+        query = insert(DisciplineTable).values(*disc_orm)
         res = await self.session.execute(query)
         return res.scalars().fetchall()
 

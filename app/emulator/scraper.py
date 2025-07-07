@@ -4,6 +4,7 @@ from pydantic import validate_call
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
+from webdriver_manager.chrome import ChromeDriverManager
 
 from ..configuration import Config
 
@@ -12,11 +13,10 @@ class Scraper(Chrome):
     def __init__(self, instructor, main_page_url=None, with_options=False):
         self.instructor = instructor
         self.main_page = main_page_url or instructor.MAIN_PAGE
+        self.options = Config.CHROME_OPTIONS if with_options else None
         super().__init__(
-            service=Service(
-                executable_path="app/emulator/drivers/chromedriver"
-            ),
-            options=Config.CHROME_OPTIONS if with_options else None
+            service=Service(ChromeDriverManager().install()),
+            options=self.options
         )
 
     def login(self):
@@ -33,7 +33,8 @@ class Scraper(Chrome):
                     res.send_keys(self.instructor.PASSWORD)
                 case "send_password+":
                     res.send_keys(self.instructor.PASSWORD, Keys.ENTER)
-            time.sleep(1)
+            if not self.options:
+                time.sleep(1)
 
     @validate_call
     def connect_main_page(self, page_url: Config.URL_PATTERN | None = None):
